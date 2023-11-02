@@ -11,6 +11,7 @@ public class MainManager : MonoBehaviour
     public Rigidbody Ball;
 
     public Text ScoreText;
+    public Text BestScoreText;
     public GameObject GameOverText;
     
     private bool m_Started = false;
@@ -60,17 +61,26 @@ public class MainManager : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             }
         }
+        BestScoreText.text = "Best Score : " + Menu.Instance.nickName + " : " + Menu.Instance.bestScore;
+
     }
 
     void AddPoint(int point)
     {
         m_Points += point;
         ScoreText.text = $"Score : {m_Points}";
+        
+        if (m_Points > Menu.Instance.bestScore)
+        {
+            Menu.Instance.nickName = Menu.Instance.tempName;
+            Menu.Instance.bestScore = m_Points;
+            Menu.Instance.SaveBestScore();
+        }
     }
 
     public void GameOver()
     {
         m_GameOver = true;
-        GameOverText.SetActive(true);
+        GameOverText.SetActive(true); 
     }
 }

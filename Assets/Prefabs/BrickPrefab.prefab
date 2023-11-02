@@ -111,4 +111,4 @@ MonoBehaviour:
   onDestroyed:
     m_PersistentCalls:
       m_Calls: []
-  PointValue: 0
+  PointValue: 1
